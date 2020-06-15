@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:torch_compat/torch_compat.dart';
 import 'package:shake/shake.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -20,10 +21,50 @@ class _HomePageState extends State<HomePage> {
 
   ShakeDetector detector;
   Timer _timer;
+  BannerAd _bannerAd;
+
+  //AdMob Configuration
+//  static const String testDevice = null;
+//  static const String testDevice = 'MObile_id';
+  static const String testDevice = '40AE2B4B64E7CF94D78A4962C114B9F4';
+
+  //Target info settings
+  static const MobileAdTargetingInfo _targetingInfo = MobileAdTargetingInfo(
+      childDirected: false,
+      keywords: <String>[
+        'lanterna',
+        'iluminação',
+        'luz emergencia',
+        'luz emergência'
+      ],
+      testDevices: testDevice != null ? <String>[testDevice] : null,
+      contentUrl: 'https://github.com/rafaxzx',
+      nonPersonalizedAds: true);
+
+  BannerAd _createBannerAd() {
+    return BannerAd(
+        //Just for test and didatics :) for me of course
+//        adUnitId: BannerAd.testAdUnitId,
+        adUnitId: 'ca-app-pub-1146346327158906/9506945152',
+        size: AdSize.banner,
+        targetingInfo: _targetingInfo,
+        listener: (MobileAdEvent event) {
+          print('BannerAd: $event');
+        });
+  }
 
   @override
   void initState() {
-    super.initState();
+    //For testing and learning
+//    FirebaseAdMob.instance
+//        .initialize(appId: BannerAd.testAdUnitId); //code for testing
+    //Firebase AdMob start
+    FirebaseAdMob.instance
+        .initialize(appId: 'ca-app-pub-1146346327158906~4676116847');
+    //Create, load and show the banner
+    _bannerAd = _createBannerAd()
+      ..load()
+      ..show(anchorType: AnchorType.top, anchorOffset: 120.0);
     _isLightOn = false;
     _shakeOn = true;
     _isTimerOn = false;
@@ -36,12 +77,14 @@ class _HomePageState extends State<HomePage> {
         onPhoneShake: () {
           _changeTorch();
         });
+    super.initState();
   }
 
   @override
   void dispose() {
-    super.dispose();
     detector.stopListening();
+    _bannerAd?.dispose();
+    super.dispose();
   }
 
   @override
@@ -82,7 +125,9 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   setState(() {
                     _shakeOn = !_shakeOn;
-                    _shakeOn ? detector.startListening() : detector.stopListening();
+                    _shakeOn
+                        ? detector.startListening()
+                        : detector.stopListening();
                   });
                 }),
             Padding(
@@ -108,7 +153,8 @@ class _HomePageState extends State<HomePage> {
                     if (_secondsTimer > 0) {
                       setState(() {
                         _isTimerOn = true;
-                        if (_secondsPreset == _secondsTimer) _turnOnOffTorch(_isTimerOn);
+                        if (_secondsPreset == _secondsTimer)
+                          _turnOnOffTorch(_isTimerOn);
                         _secondsTimer -= 1;
                       });
                     } else {

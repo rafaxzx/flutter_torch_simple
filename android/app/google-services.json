@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "940768935555",
+    "firebase_url": "https://lanterna-flutter.firebaseio.com",
+    "project_id": "lanterna-flutter",
+    "storage_bucket": "lanterna-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:940768935555:android:6235b939faa0367558e5b6",
+        "android_client_info": {
+          "package_name": "com.example.flutter_torch_simple"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "940768935555-chimph1ljtts2sm16u86ijsvg6j9uads.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_torch_simple",
+            "certificate_hash": "771deec7953ff6dcb6063ecba3d917e7bd47e37e"
+          }
+        },
+        {
+          "client_id": "940768935555-d54dr05pighfcsikvd6u495mk4ug0i3a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF8J9uZWIYV_AcvaKgdarwCZwdozDVFTM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "940768935555-d54dr05pighfcsikvd6u495mk4ug0i3a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

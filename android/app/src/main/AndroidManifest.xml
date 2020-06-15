@@ -10,6 +10,9 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="Lanterna Flutter"
         android:icon="@mipmap/launcher_icon">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-1146346327158906~4676116847"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
